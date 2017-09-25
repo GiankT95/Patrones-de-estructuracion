@@ -11,4 +11,6 @@ package EjercicioSerialKey;
  */
 public interface InterfazClienteServicios {
     
+    public void devolverSerial(Adaptador a);
+    
 }

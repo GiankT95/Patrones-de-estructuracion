@@ -11,6 +11,6 @@ package EjercicioSerialKey;
  */
 public interface InterfazDDServicios {
     
-    public void obtenerSerialDD();
+    public String obtenerSerialDD();
     
 }

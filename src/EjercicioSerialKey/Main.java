@@ -7,19 +7,19 @@ package EjercicioSerialKey;
 
 /**
  *
- * @author Asus
+ * @author Sala_02
  */
-public class Adaptador{
+public class Main {
 
-    ServiciosDD servicios;
+    /**
+     * @param args the command line arguments
+     */
     
-    public Adaptador(ServiciosDD sDD) {
-        servicios = sDD;
-    }
-   
-    public String serialDD(){
+    public static void main(String[] args) {
         
-        return servicios.obtenerSerialDD();
+        Adaptador a = new Adaptador(new ServiciosDD());
+        
+        Cliente.instance().devolverSerial(a);
     }
     
 }

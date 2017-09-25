@@ -9,6 +9,26 @@ package EjercicioSerialKey;
  *
  * @author Asus
  */
-public class Cliente {
+public class Cliente implements InterfazClienteServicios {
+    
+    private static Cliente instance = null;
+
+    public static Cliente instance() {
+        
+        if(instance == null){
+            instance = new Cliente();
+        }
+        
+        return instance;
+    }
+
+    @Override
+    public void devolverSerial(Adaptador a) {
+        
+        System.out.println(a.serialDD());
+    }
+    
+    
+    
     
 }
