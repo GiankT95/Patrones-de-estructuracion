@@ -17,9 +17,7 @@ public class Main {
     
     public static void main(String[] args) {
         
-        Adaptador a = new Adaptador(new ServiciosDD());
-        
-        Cliente.instance().devolverSerial(a);
+        Cliente.instance().recibirSerial();
     }
     
 }

@@ -9,16 +9,16 @@ package EjercicioSerialKey;
  *
  * @author Asus
  */
-public class Adaptador{
+public class Adaptador implements InterfazClienteServicios{
 
-    ServiciosDD servicios;
+    InterfazDDServicios servicios = new ServiciosDD();
     
-    public Adaptador(ServiciosDD sDD) {
-        servicios = sDD;
+    public Adaptador() {
+        servicios = new ServiciosDD();
     }
-   
-    public String serialDD(){
-        
+
+    @Override
+    public String devolverSerial() {
         return servicios.obtenerSerialDD();
     }
     

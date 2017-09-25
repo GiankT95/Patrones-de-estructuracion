@@ -8,6 +8,9 @@ package EjercicioSerialKey;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,34 +23,48 @@ public class ServiciosDD implements InterfazDDServicios{
     @Override
     public String obtenerSerialDD() {
         
-        String salida = null;
+        
         
         
         try {
             
-            String serial = "wmic diskdrive get serialnumber";
-            String aux = null;
+            String comando = "wmic diskdrive get serialnumber";
+            String salida = "";
             
-            Process proceso = Runtime.getRuntime().exec(serial);
+            
+            Process proceso = Runtime.getRuntime().exec(comando);
             
             InputStreamReader input = new InputStreamReader(proceso.getInputStream());
             BufferedReader stdInput = new BufferedReader(input);
 
-            //System.out.println(stdInput.readLine());
-
-            
-            if((aux=stdInput.readLine()) != null){
+            String aux = null;
+       
+            while((aux=stdInput.readLine()) != null){
                 
-                salida = stdInput.readLine();
+                salida = salida + aux;
             }
 
-            //System.out.println(salida);
+            String serial = "";
+            
+            for(int i=16; i<salida.length()-2; i++){
+                serial = serial + salida.charAt(i);
+            }
+            
+            char array[]=serial.toCharArray(); 
+         
+            for(int i=0;i<array.length;i++){ 
+                array[i]=(char)(array[i]+(char)10);
+            }
+            
+            String cifrado = String.valueOf(array);
+            return cifrado;
             
         } catch (IOException ex) {
             
         }
         
-        return salida;
+        return null;
+        
     }
     
 }

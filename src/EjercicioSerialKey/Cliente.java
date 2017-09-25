@@ -9,10 +9,11 @@ package EjercicioSerialKey;
  *
  * @author Asus
  */
-public class Cliente implements InterfazClienteServicios {
+public class Cliente{
     
     private static Cliente instance = null;
-
+    private InterfazClienteServicios serviciosCliente = new Adaptador();
+    
     public static Cliente instance() {
         
         if(instance == null){
@@ -21,14 +22,9 @@ public class Cliente implements InterfazClienteServicios {
         
         return instance;
     }
-
-    @Override
-    public void devolverSerial(Adaptador a) {
-        
-        System.out.println(a.serialDD());
+    
+    public void recibirSerial(){
+        System.out.println(serviciosCliente.devolverSerial());
     }
-    
-    
-    
     
 }
