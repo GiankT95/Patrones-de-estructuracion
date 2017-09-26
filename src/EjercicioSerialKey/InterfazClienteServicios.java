@@ -11,6 +11,8 @@ package EjercicioSerialKey;
  */
 public interface InterfazClienteServicios {
     
-    public String devolverSerial();
+    public String devolverLlave ();
+    public String devolverSerial(String key);
+    public boolean validarSerial(String serial);
     
 }

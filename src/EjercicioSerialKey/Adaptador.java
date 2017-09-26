@@ -18,8 +18,18 @@ public class Adaptador implements InterfazClienteServicios{
     }
 
     @Override
-    public String devolverSerial() {
-        return servicios.obtenerSerialDD();
+    public String devolverSerial(String key) {
+        return servicios.obtenerSerialDD(key);
+    }
+
+    @Override
+    public boolean validarSerial(String serial) {
+        return servicios.validarSerial(serial);
+    }
+
+    @Override
+    public String devolverLlave() {
+        return servicios.obtenerLlave();
     }
     
 }

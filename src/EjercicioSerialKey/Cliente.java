@@ -12,7 +12,7 @@ package EjercicioSerialKey;
 public class Cliente{
     
     private static Cliente instance = null;
-    private InterfazClienteServicios serviciosCliente = new Adaptador();
+    private final InterfazClienteServicios serviciosCliente = new Adaptador();
     
     public static Cliente instance() {
         
@@ -23,8 +23,30 @@ public class Cliente{
         return instance;
     }
     
-    public void recibirSerial(){
-        System.out.println(serviciosCliente.devolverSerial());
+    public String recibirLlave(){
+        
+        System.out.println("Llave: " + serviciosCliente.devolverLlave());
+        
+        return serviciosCliente.devolverLlave();
+    }
+    
+    public String recibirSerial(String key){
+        System.out.println("Serial: " + serviciosCliente.devolverSerial(key));
+        
+        return serviciosCliente.devolverSerial(key);
+    }
+    
+    public Boolean validarSerial(String serial){
+        
+        if(serviciosCliente.validarSerial(serial)){
+            System.out.println("Serial valido");
+        }
+        
+        else{
+            System.out.println("Serial invalido!");
+        }
+        
+        return serviciosCliente.validarSerial(serial);
     }
     
 }

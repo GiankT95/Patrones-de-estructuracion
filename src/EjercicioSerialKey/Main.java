@@ -17,7 +17,12 @@ public class Main {
     
     public static void main(String[] args) {
         
-        Cliente.instance().recibirSerial();
+        String llave = Cliente.instance().recibirLlave();
+        
+        String serial = Cliente.instance().recibirSerial(llave);
+        
+        Cliente.instance().validarSerial(serial);
+        
     }
     
 }

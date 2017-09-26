@@ -8,11 +8,18 @@ package EjercicioSerialKey;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
 
 /**
  *
@@ -21,16 +28,67 @@ import java.util.logging.Logger;
 public class ServiciosDD implements InterfazDDServicios{
 
     @Override
-    public String obtenerSerialDD() {
+    public String obtenerSerialDD(String key) {
         
+        String serial = "";
         
+        try {
+              
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(key.getBytes());
+            byte[] digest = md.digest();
+            
+            for (byte b : digest) {
+                serial = serial + b;
+            }    
+            
+        } 
         
+        catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ServiciosDD.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        return serial;
+        
+    }
+
+    @Override
+    public boolean validarSerial(String serialCifrado) {
+        
+        Boolean validar = false;
+        String cifrado = "";
         
         try {
             
-            String comando = "wmic diskdrive get serialnumber";
-            String salida = "";
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(this.obtenerLlave().getBytes());
+            byte[] digest = md.digest();
             
+            for (byte b : digest) {
+                cifrado = cifrado + b;
+            }
+           
+        }
+        
+        catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ServiciosDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(serialCifrado.equals(cifrado)){
+            validar = true;
+        }
+        
+        return validar;
+    }
+
+    @Override
+    public String obtenerLlave() {
+        
+        String comando = "wmic diskdrive get serialnumber";
+        String salida = "";
+        String llave = "";
+        
+        try {
             
             Process proceso = Runtime.getRuntime().exec(comando);
             
@@ -50,21 +108,27 @@ public class ServiciosDD implements InterfazDDServicios{
                 serial = serial + salida.charAt(i);
             }
             
-            char array[]=serial.toCharArray(); 
-         
-            for(int i=0;i<array.length;i++){ 
-                array[i]=(char)(array[i]+(char)10);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(serial.getBytes());
+            byte[] digest = md.digest();
+            
+            for (byte b : digest) {
+                llave = llave + b;
             }
             
-            String cifrado = String.valueOf(array);
-            return cifrado;
+            
             
         } catch (IOException ex) {
             
+        } 
+        
+        catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ServiciosDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return null;
-        
+        return llave;
     }
+    
+    
     
 }

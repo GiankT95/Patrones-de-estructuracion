@@ -11,6 +11,7 @@ package EjercicioSerialKey;
  */
 public interface InterfazDDServicios {
     
-    public String obtenerSerialDD();
-    
+    public String obtenerLlave ();
+    public String obtenerSerialDD(String key);
+    public boolean validarSerial(String serial);
 }
