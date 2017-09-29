@@ -5,13 +5,14 @@
  */
 package PatronComposite;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
  *
  * @author Sala_04
  */
-public class Compuesto extends Componente {
+public class Compuesto implements Componente {
 
     protected ArrayList<Componente> componentes;
 
@@ -19,17 +20,34 @@ public class Compuesto extends Componente {
         componentes = new ArrayList();
     }
 
-    public void agregaComponente(Componente c){
+    @Override
+    public void agregarComponente(Componente c) {
         componentes.add(c);
     }
-    
-    public void suprimirComponente(Componente c){
+
+    @Override
+    public void suprimirComponente(Componente c) {
         componentes.remove(c);
     }
-    
+
     @Override
-    public void solicita() {
-        
+    public void solicita(File ruta) {
+
+        File listFile[] = ruta.listFiles();
+        if (listFile != null) {
+            
+            for (File listFile1 : listFile) {
+                
+                System.out.println(listFile1.getName());
+                
+                if (listFile1.isDirectory()) {
+                    solicita(listFile1);
+                } else {
+                    System.err.println("    "+listFile1.getName());
+                }
+            }
+        }
+
     }
 
     public ArrayList<Componente> getComponentes() {

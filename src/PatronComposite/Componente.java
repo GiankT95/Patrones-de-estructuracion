@@ -5,14 +5,17 @@
  */
 package PatronComposite;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
  *
  * @author Sala_04
  */
-public abstract class Componente {
+public interface Componente {
 
-    public abstract void solicita();
+    public abstract void solicita(File ruta);
+    public void agregarComponente(Componente c);
+    public void suprimirComponente(Componente c);
     
 }

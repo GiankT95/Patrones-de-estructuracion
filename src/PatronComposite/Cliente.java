@@ -11,4 +11,27 @@ package PatronComposite;
  */
 public class Cliente {
     
+    private static Cliente instance = null;
+    private Componente componente;
+    
+    
+    public static Cliente instance() {
+        
+        if(instance == null){
+            instance = new Cliente();
+        }
+        
+        return instance;
+    }
+
+    public Componente getComponente() {
+        return componente;
+    }
+
+    public void setComponente(Componente componente) {
+        this.componente = componente;
+    }
+    
+    
+    
 }
