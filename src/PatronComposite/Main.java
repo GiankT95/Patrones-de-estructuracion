@@ -18,12 +18,10 @@ public class Main {
      */
     public static void main(String[] args) {
        
-       Componente comp = new Hoja();
-        
-       Cliente.instance().setComponente(comp);
+       Compuesto c = new Compuesto("");
        
-       Cliente.instance().getComponente().solicita(new File("C:\\Users\\Sala_04\\Documents\\NetBeansProjects\\insercion_de_nodos_pilas"));
-       
+       Cliente.instance(c).generarArbol(new File("C:\\Users\\Sala_02\\Documents"));
+       Cliente.instance(c).imprimirArbol();
     }
     
 }

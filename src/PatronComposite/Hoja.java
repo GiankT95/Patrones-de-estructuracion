@@ -11,23 +11,20 @@ import java.io.File;
  *
  * @author Sala_04
  */
-public class Hoja implements Componente{
+public class Hoja extends Componente{
     
-    public Hoja() {
-        
+    public Hoja(String nombre) {
+        this.nombre = nombre;
     }
     
     @Override
-    public void solicita(File ruta) {
-        
-        if(ruta.isFile()){
-            System.out.println(ruta.getName());
-        }
-        
+    public void solicita() {
+
+            System.err.println("    "+this.nombre);    
     }
 
     @Override
-    public void agregarComponente(Componente c) {
+    public void agregarComponentes(File ruta) {
         throw new UnsupportedOperationException("No puede agregar componentes a este objeto");
     }
 

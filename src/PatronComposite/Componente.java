@@ -12,10 +12,12 @@ import java.util.ArrayList;
  *
  * @author Sala_04
  */
-public interface Componente {
+public abstract class Componente {
 
-    public abstract void solicita(File ruta);
-    public void agregarComponente(Componente c);
-    public void suprimirComponente(Componente c);
+    protected String nombre;
+    
+    public abstract void solicita();
+    public abstract void agregarComponentes(File ruta);
+    public abstract void suprimirComponente(Componente c);
     
 }

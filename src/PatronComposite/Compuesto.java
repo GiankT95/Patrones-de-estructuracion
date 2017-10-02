@@ -12,17 +12,37 @@ import java.util.ArrayList;
  *
  * @author Sala_04
  */
-public class Compuesto implements Componente {
+public class Compuesto extends Componente {
 
     protected ArrayList<Componente> componentes;
 
-    public Compuesto() {
+    public Compuesto(String nombre) {
         componentes = new ArrayList();
+        this.nombre = nombre;
     }
 
     @Override
-    public void agregarComponente(Componente c) {
-        componentes.add(c);
+    public void agregarComponentes(File ruta) {
+        
+        File listFile[] = ruta.listFiles();
+        
+        if (listFile != null) {
+            
+            for (File file : listFile) {
+                
+                if(file.isFile()){
+                    Componente c = new Hoja(file.getName());
+                    componentes.add(c);
+                }
+                
+                else {
+                    Componente c = new Compuesto(file.getName());
+                    componentes.add(c);
+                }
+                
+            }
+        }
+   
     }
 
     @Override
@@ -31,23 +51,14 @@ public class Compuesto implements Componente {
     }
 
     @Override
-    public void solicita(File ruta) {
-
-        File listFile[] = ruta.listFiles();
-        if (listFile != null) {
-            
-            for (File listFile1 : listFile) {
-                
-                System.out.println(listFile1.getName());
-                
-                if (listFile1.isDirectory()) {
-                    solicita(listFile1);
-                } else {
-                    System.err.println("    "+listFile1.getName());
-                }
-            }
+    public void solicita() {
+        
+        System.out.println(this.nombre);
+        
+        for(Componente c : componentes){
+            c.solicita();
         }
-
+        
     }
 
     public ArrayList<Componente> getComponentes() {

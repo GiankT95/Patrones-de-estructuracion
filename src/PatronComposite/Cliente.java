@@ -5,6 +5,8 @@
  */
 package PatronComposite;
 
+import java.io.File;
+
 /**
  *
  * @author Sala_04
@@ -15,13 +17,25 @@ public class Cliente {
     private Componente componente;
     
     
-    public static Cliente instance() {
+    public static Cliente instance(Componente c) {
         
         if(instance == null){
-            instance = new Cliente();
+            instance = new Cliente(c);
         }
         
         return instance;
+    }
+    
+    public Cliente (Componente c){
+        this.componente = c;
+    }
+    
+    public void generarArbol(File ruta){
+        componente.agregarComponentes(ruta);
+    }
+    
+    public void imprimirArbol(){
+        this.componente.solicita();
     }
 
     public Componente getComponente() {
